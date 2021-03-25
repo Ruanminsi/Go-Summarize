@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+message SimpleRequest{
+    string data = 1;
+}
+
+message SimpleResponse{
+    int32 code = 1;
+    string value = 2;
+}
+
+message StreamRequest{
+    string stream_data = 1;
+}
+
+service StreamClient{
+    rpc Route(SimpleRequest) returns (SimpleResponse){}
+
+    // 客户端流
+    rpc RouteList(stream StreamRequest) returns (SimpleResponse){}
+}
