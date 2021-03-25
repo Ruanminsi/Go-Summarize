@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+message SimpleRequest{
+    string data = 1;
+}
+
+message SimpleResponse{
+    string code = 1;
+    string val = 2;
+}
+
+message StreamResponse{
+    // 流式响应数据
+    string stream_reply = 1;
+}
+
+service StreamServer{
+    rpc Route(SimpleRequest) returns (SimpleResponse){}
+    // 服务端流式rpc，在响应数据前添加stream
+    rpc ListValue(SimpleRequest) returns (stream StreamResponse){}
+}
+
