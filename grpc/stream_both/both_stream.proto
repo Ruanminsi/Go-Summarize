@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+message SimpleRequest{
+    string data = 1;
+}
+
+message SimpleResponse{
+    int32 code = 1;
+    string value = 2;
+}
+
+message BothRequest{
+    string question = 1;
+}
+
+message BothResponse{
+    string answer = 1;
+}
+
+service BothService{
+    rpc Route(SimpleRequest) returns(SimpleResponse){}
+
+    rpc BothRoute(stream BothRequest) returns (stream BothResponse){}
+}
